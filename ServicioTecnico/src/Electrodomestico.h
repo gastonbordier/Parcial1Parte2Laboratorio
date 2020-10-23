@@ -9,6 +9,7 @@
 #define ELECTRODOMESTICO_H_
 
 #include "Marcas.h"
+#include "validations.h"
 
 
 typedef struct {
@@ -77,6 +78,9 @@ int addElectro(Electrodomestico *electro, int arrayPosition, char serie[], Marca
  *\return 0 si lo encuentra, -1 si la posicion esta vacia
  *  */
 int getElectroArrayPositionById( Electrodomestico *electro, int len, int id);
+
+
+
 
 
 

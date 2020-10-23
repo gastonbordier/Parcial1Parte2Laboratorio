@@ -2,7 +2,7 @@
  * Cliente.h
  *
  *  Created on: 20 oct. 2020
- *      Author: Administrador
+ *      Author: Gaston
  */
 
 #ifndef CLIENTE_H_

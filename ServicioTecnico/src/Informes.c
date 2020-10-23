@@ -11,79 +11,147 @@
 
 #include "Informes.h"
 
-int orderReparacionBySerieCode(Reparacion reparacionO[], int len) {
+
+
+int filter2020Reparacion(Reparacion reparacion[], int len) {
+	Reparacion reparacionO[len];
+	for (int i = 0; i < len; i++) {
+		reparacionO[i] = reparacion[i];
+	}
+
 	int retorno = -1;
 	int large = getReparacionesAdded(reparacionO, len);
-	int largeC = large;
-	printf("Large = %d\n", large);
 
-	Reparacion rtemp;
+	int filtred = 0;
+	printf("Large = %d\n", large);
 
 	int comp;
 
-	for (int h = 0; h < (large - 1); h++) {
-		for (int i = 0; i < (largeC - 1); i++) {
-			int j = i + 1;
+	for (int h = 0; h < large; h++) {
 
-			comp = strcmp(reparacionO[i].ElectroR.serie,
-					reparacionO[j].ElectroR.serie);
-			//		printf(" Comparacion entre %s y %s = %d\n",
-			//				reparacionO[i].ElectroR.serie,
-			//				reparacionO[j].ElectroR.serie, comp);
+		comp = (reparacionO[h].fecha.anio == 2020);
 
-			if (comp == 1) {
-				//			printf("%s sube de lugar\n", reparacionO[j].ElectroR.serie);
-				rtemp = reparacionO[i];
-				reparacionO[i] = reparacionO[j];
-				reparacionO[j] = rtemp;
+		if (comp == 1) {
+
+			if (h != filtred) {
+				reparacionO[filtred] = reparacionO[h];
 			}
-			//	printArrayReparacion(reparacionO, len);
-			//		system("pause");
-			//		printf("\n\n");
+			++filtred;
+			//		printArrayReparacion(reparacionO, len);
+
+			//	system("pause");
 		}
-		--largeC;
 
 	}
-	printf(
-			"Listado de reparaciones ordenado alfabeticamente por codigo de serie.\n");
-	printArrayReparacion(reparacionO, len);
+	printf("Listado de reparaciones del año 2020.\n");
+	printf("\n%5s|%13s|%13s|%13s|%13s|%13s|%9s|%13s|%7s|\n\n", "Id", "Fecha",
+			"Nombre", "Apellido", "Serie", "Marca", "Modelo", "Servicio",
+			"Precio");
+	for (int i = 0; i < filtred; i++) {
+
+		if (reparacionO[i].isEmpty == 0) {
+			printf("%5d|%13s|%13s|%13s|%13s|%13s|%9d|%13s|%7d|\n",
+					reparacionO[i].id, reparacionO[i].fecha.completeDate,
+					reparacionO[i].clienteR.nombre,
+					reparacionO[i].clienteR.apellido,
+					reparacionO[i].ElectroR.serie,
+					reparacionO[i].ElectroR.marcaElectro.descripcion,
+					reparacionO[i].ElectroR.modelo,
+					reparacionO[i].ServicioR.descripcion,
+					reparacionO[i].ServicioR.precio);
+
+		} else {
+			break;
+		}
+
+	}
+	printf("\n");
+
 	return retorno;
 }
 
-int orderReparacionByLastName(Reparacion reparacionO[], int len) {
-	int retorno = -1;
-	int large = getReparacionesAdded(reparacionO, len);
-	int largeC = large;
-	printf("Large = %d\n", large);
-
-	Reparacion rtemp;
-
-	int comp;
-
-	for (int h = 0; h < (large - 1); h++) {
-		for (int i = 0; i < (largeC - 1); i++) {
-			int j = i + 1;
-
-			comp = strcmp(reparacionO[i].clienteR.apellido,
-					reparacionO[j].clienteR.apellido);
-			//	printf(" Comparacion entre %s y %s = %d\n",
-			//			reparacionO[i].clienteR.apellido,
-			//			reparacionO[j].clienteR.apellido, comp);
-
-			if (comp == 1) {
-				//		printf("%s sube de lugar\n", reparacionO[j].clienteR.apellido);
-				rtemp = reparacionO[i];
-				reparacionO[i] = reparacionO[j];
-				reparacionO[j] = rtemp;
-			}
-			//	system("pause");
-			//	printf("\n\n");
-		}
-		--largeC;
-
+int filterElectrodomesticoByMarca(Electrodomestico *electro, int len,
+		Marca *marca) {
+	Electrodomestico electroO[len];
+	for (int i = 0; i < len; i++) {
+		electroO[i] = electro[i];
 	}
-	printf(
-			"Listado de reparaciones ordenado alfabeticamente por apellido del cliente\n");
-	printArrayReparacion(reparacionO, len);
+
+	int retorno = -1;
+	int large = getElectrosAdded(electroO, len);
+	int chosen;
+
+	printf("Ingrese el id de la marca deseada\n");
+	printMarcas(marca);
+
+	int flag1 = 0;
+
+	flag1 += setInt(&chosen, "Elija de la lista", "Ingreso de marca cancelado",
+			1001, 1005, 3);
+
+	if (flag1 == 0) {
+		int comp;
+		int filtred = 0;
+
+		for (int h = 0; h < large; h++) {
+
+			comp = (electroO[h].marcaElectro.id == chosen);
+			if (comp == 1) {
+				if (h != filtred) {
+					electroO[filtred] = electroO[h];
+				}
+				++filtred;
+			}
+
+		}
+		printArrayElectro(electroO, filtred);
+	}
+
+	return retorno;
+}
+
+int showReparacionesByElectrodomestico(Electrodomestico *electro,
+		Reparacion reparacion[], int len) {
+	int retorno = 0;
+	Electrodomestico electroO[len];
+	for (int i = 0; i < len; i++) {
+		electroO[i] = electro[i];
+	}
+	Reparacion reparacionO[len];
+	for (int i = 0; i < len; i++) {
+		reparacionO[i] = reparacion[i];
+	}
+
+	int largeE = getElectrosAdded(electroO, len);
+	int largeR = getReparacionesAdded(reparacionO, len);
+
+	printArrayElectro(electroO, len);
+
+	int flagOk = 0;
+	int chosen = 0;
+	int comp;
+	int filtred = 0;
+
+	flagOk += setInt(&chosen, "Ingrese el id del electrodomestico",
+			"Ingreso cancelado", 1, largeE, 3);
+
+	if (flagOk == 0) {
+
+		for (int h = 0; h < largeR; h++) {
+
+			comp = (reparacionO[h].ElectroR.id == chosen);
+			if (comp == 1) {
+				if (h != filtred) {
+					reparacionO[filtred] = reparacionO[h];
+				}
+				++filtred;
+			}
+			//	printf("Id %d Comp %d\n", reparacionO[h].ElectroR.id, comp);
+
+		}
+		printf("Mostrando las reparaciones existentes al id %d\n", chosen);
+		printArrayReparacion(reparacionO, filtred);
+	}
+
 	return retorno;
 }

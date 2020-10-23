@@ -2,7 +2,7 @@
  * Cliente.c
  *
  *  Created on: 20 oct. 2020
- *      Author: Administrador
+ *      Author: Gaston
  */
 
 

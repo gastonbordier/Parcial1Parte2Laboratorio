@@ -8,8 +8,17 @@
 #include "Reparacion.h"
 #include "validations.h"
 
-int orderReparacionBySerieCode(Reparacion reparacionO[], int len);
-int orderReparacionByLastName(Reparacion reparacionO[], int len);
+
+
+int filter2020Reparacion(Reparacion reparacion[], int len);
+
+int filterElectrodomesticoByMarca(Electrodomestico *electro, int len,
+		Marca *marca);
+
+int showReparacionesByElectrodomestico(Electrodomestico *electro,
+		Reparacion reparacion[], int len);
+
+
 
 #ifndef INFORMES_H_
 #define INFORMES_H_
