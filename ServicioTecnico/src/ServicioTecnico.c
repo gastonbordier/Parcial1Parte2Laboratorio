@@ -62,79 +62,8 @@ int main(void) {
 	initArrayElectro(electro, MAX);
 	initArrayReparacion(reparacion, MAX);
 
-	int firstArray;
 
-	firstArray = searchFirstEmptyElectro(electro, MAX);
-	addElectro(electro, firstArray, "AO4OD0S0", marca[1], 2015);
-	firstArray = searchFirstEmptyElectro(electro, MAX);
-	addElectro(electro, firstArray, "AB0D020S", marca[2], 2015);
-	firstArray = searchFirstEmptyElectro(electro, MAX);
-	addElectro(electro, firstArray, "CLDL4LWL", marca[3], 2009);
-	firstArray = searchFirstEmptyElectro(electro, MAX);
-	addElectro(electro, firstArray, "AD2DS000", marca[2], 2002);
-	firstArray = searchFirstEmptyElectro(electro, MAX);
-	addElectro(electro, firstArray, "AR2DS000", marca[4], 2018);
-	firstArray = searchFirstEmptyElectro(electro, MAX);
-	addElectro(electro, firstArray, "FD2HS000", marca[1], 2007);
-	firstArray = searchFirstEmptyElectro(electro, MAX);
-	addElectro(electro, firstArray, "DI5WS0A7", marca[4], 2010);
-	firstArray = searchFirstEmptyElectro(electro, MAX);
-	addElectro(electro, firstArray, "AO27S064", marca[0], 2012);
 
-	firstArray = searchFirstEmptyReparacion(reparacion, MAX);
-	Fecha fechaHardCode[9];
-
-	strcpy(fechaHardCode[0].completeDate, "01/05/2020");
-	strcpy(fechaHardCode[1].completeDate, "22/10/2019");
-	strcpy(fechaHardCode[2].completeDate, "24/05/2020");
-	strcpy(fechaHardCode[3].completeDate, "23/10/2019");
-	strcpy(fechaHardCode[4].completeDate, "23/10/2020");
-	strcpy(fechaHardCode[5].completeDate, "06/07/2020");
-	strcpy(fechaHardCode[6].completeDate, "04/02/2020");
-	strcpy(fechaHardCode[7].completeDate, "15/08/2019");
-	strcpy(fechaHardCode[8].completeDate, "04/11/2020");
-
-	for (int i = 0; i < 9; i++) {
-		fechaHardCode[i].dia = getDay(fechaHardCode[i].completeDate);
-		fechaHardCode[i].mes = getMonth(fechaHardCode[i].completeDate);
-		fechaHardCode[i].anio = getYear(fechaHardCode[i].completeDate);
-
-	}
-
-	addReparacion(reparacion, firstArray, fechaHardCode[0], electro[0],
-			servicio[0], cliente[7]);
-
-	firstArray = searchFirstEmptyReparacion(reparacion, MAX);
-	addReparacion(reparacion, firstArray, fechaHardCode[1], electro[5],
-			servicio[1], cliente[0]);
-
-	firstArray = searchFirstEmptyReparacion(reparacion, MAX);
-	addReparacion(reparacion, firstArray, fechaHardCode[2], electro[1],
-			servicio[1], cliente[5]);
-
-	firstArray = searchFirstEmptyReparacion(reparacion, MAX);
-	addReparacion(reparacion, firstArray, fechaHardCode[3], electro[7],
-			servicio[2], cliente[8]);
-
-	firstArray = searchFirstEmptyReparacion(reparacion, MAX);
-	addReparacion(reparacion, firstArray, fechaHardCode[4], electro[1],
-			servicio[1], cliente[1]);
-
-	firstArray = searchFirstEmptyReparacion(reparacion, MAX);
-	addReparacion(reparacion, firstArray, fechaHardCode[5], electro[4],
-			servicio[2], cliente[3]);
-
-	firstArray = searchFirstEmptyReparacion(reparacion, MAX);
-	addReparacion(reparacion, firstArray, fechaHardCode[6], electro[4],
-			servicio[1], cliente[2]);
-
-	firstArray = searchFirstEmptyReparacion(reparacion, MAX);
-	addReparacion(reparacion, firstArray, fechaHardCode[7], electro[6],
-			servicio[3], cliente[4]);
-
-	firstArray = searchFirstEmptyReparacion(reparacion, MAX);
-	addReparacion(reparacion, firstArray, fechaHardCode[8], electro[2],
-			servicio[3], cliente[6]);
 
 	flagClean = 0;
 
@@ -414,24 +343,8 @@ int main(void) {
 			showReparacionesByElectrodomestico(electro, reparacion, MAX);
 			break;
 		case 12:
+			facturacionTotalPorMantenimientos(reparacion, MAX);
 			break;
-		case 13:
-			break;
-		case 14:
-			break;
-		case 15:
-			break;
-		case 16:
-			break;
-		case 17:
-			break;
-		case 18:
-			break;
-		case 19:
-			break;
-		case 20:
-			break;
-
 		case 21:
 			response = -1;
 			break;
@@ -480,15 +393,8 @@ int menu() {
 					"10 - Mostrar electrodomesticos de una marca seleccionada\n");
 			printf(
 					"11 - Mostrar todas las reparaciones efectuadas al electrodomestico seleccionado\n");
-			printf("12 - Listar los electrodomesticos que no tuvieron reparaciones\n");
-			printf("13 - ");
-			printf("14 - ");
-			printf("15 - ");
-			printf("16 - ");
-			printf("17 - ");
-			printf("18 - ");
-			printf("19 - ");
-			printf("20 - ");
+			printf("12 - Sumar lo recaudado por mantenimientos.\n");
+
 
 		}
 		printf("21 - Salir \n");

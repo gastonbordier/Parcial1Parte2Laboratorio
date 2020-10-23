@@ -18,7 +18,7 @@ int filterElectrodomesticoByMarca(Electrodomestico *electro, int len,
 int showReparacionesByElectrodomestico(Electrodomestico *electro,
 		Reparacion reparacion[], int len);
 
-
+int facturacionTotalPorMantenimientos(Reparacion reparacion[], int len);
 
 #ifndef INFORMES_H_
 #define INFORMES_H_

@@ -155,3 +155,22 @@ int showReparacionesByElectrodomestico(Electrodomestico *electro,
 
 	return retorno;
 }
+
+int facturacionTotalPorMantenimientos(Reparacion reparacion[], int len){
+
+	int total = 0;
+	int suma = 0;
+
+	for( int i = 0; i < len ; i++){
+
+		if( reparacion[i].ServicioR.idServicio == 20002){
+			++suma;
+			total += reparacion[i].ServicioR.precio;
+
+		}
+	}
+
+	printf("El total recaudado en %d mantenimientos es $ %d\n", suma, total);
+
+	return 0;
+}
