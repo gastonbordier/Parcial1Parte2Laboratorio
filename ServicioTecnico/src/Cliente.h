@@ -17,6 +17,6 @@ typedef struct {
 
 }Cliente;
 
-int printClientes( Cliente *cliente);
+int printClientes( Cliente cliente[]);
 
 #endif /* CLIENTE_H_ */

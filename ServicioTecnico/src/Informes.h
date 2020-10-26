@@ -19,6 +19,13 @@ int showReparacionesByElectrodomestico(Electrodomestico electro[], Reparacion re
 
 int facturacionTotalPorMantenimientos(Reparacion reparacion[], int len);
 
+int listElectroWithoutReparaciones(Electrodomestico electroO[],
+		Reparacion reparacion[], int len);
+
+int showTotalAmountByElectrodomestico(Electrodomestico electro[],
+		Reparacion reparacion[], int len);
+int getMostRequiredServicio(Reparacion reparacion[], int len, Servicio servicio[]);
+
 #ifndef INFORMES_H_
 #define INFORMES_H_
 

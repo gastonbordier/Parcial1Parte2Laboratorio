@@ -12,7 +12,7 @@
 #include "Cliente.h"
 
 
-int printClientes( Cliente *cliente){
+int printClientes( Cliente cliente[]){
 
 	printf("Id\tNombre\tApellido\n");
 	for( int i = 0; i <= 9; i++){

@@ -50,7 +50,7 @@ int searchFirstEmptyElectro(Electrodomestico *electro, int len) {
 	return retorno;
 }
 
-int getElectrosAdded(Electrodomestico *electro, int len) {
+int getElectrosAdded(Electrodomestico electro[], int len) {
 
 	int retorno = 0;
 	for (int i = 0; i < len; i++) {
@@ -64,7 +64,7 @@ int getElectrosAdded(Electrodomestico *electro, int len) {
 	return retorno;
 }
 
-int getElectroArrayPositionById(Electrodomestico *electro, int len, int id) {
+int getElectroArrayPositionById(Electrodomestico electro[], int len, int id) {
 	int returnElectro = -1;
 
 	for (int i = 0; i < len; i++) {

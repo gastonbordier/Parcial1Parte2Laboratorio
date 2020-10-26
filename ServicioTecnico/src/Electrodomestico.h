@@ -46,7 +46,7 @@ int printArrayElectro(Electrodomestico electro[], int len);
  *\param len la longitud maxima del array
  *\return la ubicacion del primer elemento vacio
  *  */
-int searchFirstEmptyElectro(Electrodomestico *electro, int len);
+int searchFirstEmptyElectro(Electrodomestico electro[], int len);
 
 /*
  * author Gaston Bordier
@@ -55,7 +55,7 @@ int searchFirstEmptyElectro(Electrodomestico *electro, int len);
  *\param len la longitud maxima del array
  *\return la cantidad de elementos existentes
  *  */
-int getElectrosAdded(Electrodomestico *electro, int len);
+int getElectrosAdded(Electrodomestico electro[], int len);
 
 /*
  * author Gaston Bordier
@@ -77,7 +77,7 @@ int addElectro(Electrodomestico *electro, int arrayPosition, char serie[], Marca
  *\param id el id buscado
  *\return 0 si lo encuentra, -1 si la posicion esta vacia
  *  */
-int getElectroArrayPositionById( Electrodomestico *electro, int len, int id);
+int getElectroArrayPositionById( Electrodomestico electro[], int len, int id);
 
 
 

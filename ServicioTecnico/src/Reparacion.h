@@ -28,11 +28,11 @@ typedef struct {
 }Reparacion;
 
 int initArrayReparacion(Reparacion *reparacion, int len);
-int searchFirstEmptyReparacion(Reparacion *reparacion, int len);
+int searchFirstEmptyReparacion(Reparacion reparacion[], int len);
 
-int getReparacionesAdded(Reparacion *reparacion, int len);
+int getReparacionesAdded(Reparacion reparacion[], int len);
 
-int getReparacionArrayPositionById( Reparacion *reparacion, int len, int id);
+int getReparacionArrayPositionById( Reparacion reparacion[], int len, int id);
 
 int addReparacion(Reparacion *reparacion, int arrayPosition, Fecha fecha,
 		Electrodomestico electro, Servicio servicio, Cliente cliente);

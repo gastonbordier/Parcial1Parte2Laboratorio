@@ -40,7 +40,7 @@ int addReparacion(Reparacion *reparacion, int arrayPosition, Fecha fecha,
 	return 0;
 }
 
-int searchFirstEmptyReparacion(Reparacion *reparacion, int len) {
+int searchFirstEmptyReparacion(Reparacion reparacion[], int len) {
 
 	int retorno;
 	for (int i = 0; i < len; i++) {
@@ -54,7 +54,7 @@ int searchFirstEmptyReparacion(Reparacion *reparacion, int len) {
 	return retorno;
 }
 
-int getReparacionesAdded(Reparacion *reparacion, int len) {
+int getReparacionesAdded(Reparacion reparacion[], int len) {
 
 	int retorno = 0;
 	for (int i = 0; i < len; i++) {
@@ -67,7 +67,7 @@ int getReparacionesAdded(Reparacion *reparacion, int len) {
 	return retorno;
 }
 
-int getReparacionArrayPositionById(Reparacion *reparacion, int len, int id) {
+int getReparacionArrayPositionById(Reparacion reparacion[], int len, int id) {
 	int returnR = -1;
 
 	for (int i = 0; i < len; i++) {
@@ -83,13 +83,14 @@ int getReparacionArrayPositionById(Reparacion *reparacion, int len, int id) {
 int printArrayReparacion(Reparacion reparacion[], int len) {
 
 	int arrayLength = 0;
-	printf("\n%5s|%13s|%13s|%13s|%13s|%13s|%9s|%13s|%7s|\n\n", "Id", "Fecha", "Nombre", "Apellido", "Serie", "Marca", "Modelo", "Servicio", "Precio");
+	printf("\n%5s|%13s|%13s|%13s|%11s|%13s|%13s|%9s|%13s|%7s|\n\n", "Id", "Fecha", "Nombre", "Apellido", "Id Electro", "Serie", "Marca", "Modelo", "Servicio", "Precio");
 	for (int i = 0; i < len; i++) {
 
 		if (reparacion[i].isEmpty == 0) {
-			printf("%5d|%13s|%13s|%13s|%13s|%13s|%9d|%13s|%7d|\n", reparacion[i].id,
+			printf("%5d|%13s|%13s|%13s|%11d|%13s|%13s|%9d|%13s|%7d|\n", reparacion[i].id,
 					reparacion[i].fecha.completeDate, reparacion[i].clienteR.nombre,
 					reparacion[i].clienteR.apellido,
+					reparacion[i].ElectroR.id,
 					reparacion[i].ElectroR.serie,
 					reparacion[i].ElectroR.marcaElectro.descripcion,
 					reparacion[i].ElectroR.modelo,

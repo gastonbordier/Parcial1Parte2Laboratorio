@@ -2,17 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-/*
- * author Gaston
- * \brief valida ingreso de dato de tipo entero
- * \param *pOutput la variable original int a sobreescribir
- * \param message mensaje a mostrar pidiendo el tipo de ingreso
- * \param errorMessage mensaje a mostrar si la validacion falla
- * \param min entero minimo aceptado
- * \param max entero maximo aceptado
- * \param retries numero de reintentos
- * \return 0 si la validacion fue exitosa, 1 si se consumieron todos los reintentos
- */
+
 
 int setInt(int *pOutput, char message[51], char errorMessage[51], int min,
 		int max, int retries) {
@@ -39,17 +29,7 @@ int setInt(int *pOutput, char message[51], char errorMessage[51], int min,
 	return retorno;
 }
 
-/*
- * author Gaston
- * \brief valida ingreso de dato de tipo array de caracteres
- * \param *pOutput la variable original char[] a sobreescribir
- * \param message mensaje a mostrar pidiendo el tipo de ingreso
- * \param errorMessage mensaje a mostrar si la validacion falla
- * \param min cantidad de caracteres minima aceptada
- * \param max cantidad de caracteres maxima aceptada
- * \param retries numero de reintentos
- * \return 0 si la validacion fue exitosa, 1 si se consumieron todos los reintentos
- */
+
 int setString(char *pOutput, char message[51], char errorMessage[51], int min,
 		int max, int retries) {
 	int retorno = -1;
@@ -60,7 +40,7 @@ int setString(char *pOutput, char message[51], char errorMessage[51], int min,
 		fflush(stdin);
 		fgets(pOutput, 13, stdin);
 
-		pOutput[strlen(pOutput)-1] = '\0';
+		pOutput[strlen(pOutput) - 1] = '\0';
 
 		if ((strlen(pOutput)) >= min && (strlen(pOutput)) <= max) {
 			printf("Ingreso correcto\n");
@@ -84,17 +64,7 @@ int setString(char *pOutput, char message[51], char errorMessage[51], int min,
 	return retorno;
 }
 
-/*
- * author Gaston
- * \brief valida ingreso de dato de tipo flotante
- * \param *pOutput la variable original float a sobreescribir
- * \param message mensaje a mostrar pidiendo el tipo de ingreso
- * \param errorMessage mensaje a mostrar si la validacion falla
- * \param min flotante minimo aceptado
- * \param max flotante maximo aceptado
- * \param retries numero de reintentos
- * \return 0 si la validacion fue exitosa, 1 si se consumieron todos los reintentos
- */
+
 int setFloat(float *pOutput, char message[51], char errorMessage[51], int min,
 		int max, int retries) {
 	int retorno = -1;
@@ -120,26 +90,54 @@ int setFloat(float *pOutput, char message[51], char errorMessage[51], int min,
 	return retorno;
 }
 
-int setDate(char *dateDDMMYY) {
-
+int setStringAlphanumeric(char *pOutput, char message[51],
+		char errorMessage[51], int min, int max, int retries) {
+	int retorno = -1;
 	int flagOk = 0;
-	char date[11] = "      ";
-	char dayS[3];
+	printf("%s\n", message);
 
-
-	int retorno = 1;
-
-	do {
-
-		printf("ingrese la fecha en formato DD/MM/YYYY\n");
+	while (retries > 0) {
 
 		fflush(stdin);
-		fgets(date, 11, stdin);
+		fgets(pOutput, 13, stdin);
 
-		printf("Dia = %s\n", dayS);
+		pOutput[strlen(pOutput) - 1] = '\0';
 
-		flagOk = 1;
-	} while (flagOk != 1);
+		if ((strlen(pOutput)) >= min && (strlen(pOutput)) <= max) {
+			flagOk = 1;
+		}
+		if (flagOk == 1) {
+			for (int i = 0; i < strlen(pOutput); i++) {
+				if (pOutput[i] >= 'a' && pOutput[i] <= 'z') {
+					flagOk = 2;
+					pOutput[i] += -32;										//CONVERSION DE MINUSCULAS A MAYUSCULAS
+
+				} else if (pOutput[i] >= 'A' && pOutput[i] <= 'Z') {
+					flagOk = 2;
+				} else if (pOutput[i] >= '0' && pOutput[i] <= '9') {
+					flagOk = 2;
+				} else {
+					flagOk = 0;
+					break;
+				}
+			}
+
+		}
+
+		if (flagOk == 2) {
+			printf("Ingreso correcto\n");
+			retries = -1;
+			retorno = 0;
+		} else {
+			--retries;
+			if (retries >= 1) {
+				printf("Intentelo nuevamente.\n");
+			}
+		}
+
+	}
+	if (retorno == -1)
+		printf("%s\n", errorMessage);
 
 	return retorno;
 }
