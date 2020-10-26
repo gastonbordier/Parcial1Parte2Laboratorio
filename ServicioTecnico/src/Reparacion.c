@@ -80,7 +80,7 @@ int getReparacionArrayPositionById(Reparacion *reparacion, int len, int id) {
 	return returnR;
 }
 
-int printArrayReparacion(Reparacion *reparacion, int len) {
+int printArrayReparacion(Reparacion reparacion[], int len) {
 
 	int arrayLength = 0;
 	printf("\n%5s|%13s|%13s|%13s|%13s|%13s|%9s|%13s|%7s|\n\n", "Id", "Fecha", "Nombre", "Apellido", "Serie", "Marca", "Modelo", "Servicio", "Precio");

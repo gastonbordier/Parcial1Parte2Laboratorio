@@ -10,13 +10,12 @@
 
 
 
-int filter2020Reparacion(Reparacion reparacion[], int len);
+int filter2020Electro(Electrodomestico electro[], int len);
 
-int filterElectrodomesticoByMarca(Electrodomestico *electro, int len,
-		Marca *marca);
+int filterElectrodomesticoByMarca(Electrodomestico electro[], int len,
+		Marca marca[]);
 
-int showReparacionesByElectrodomestico(Electrodomestico *electro,
-		Reparacion reparacion[], int len);
+int showReparacionesByElectrodomestico(Electrodomestico electro[], Reparacion reparacion[], int len);
 
 int facturacionTotalPorMantenimientos(Reparacion reparacion[], int len);
 

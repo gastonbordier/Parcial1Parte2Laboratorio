@@ -36,7 +36,7 @@ int initArrayElectro(Electrodomestico *e, int len);
  *\param len la longitud maxima del array
  *\return 0
  *  */
-int printArrayElectro(Electrodomestico *electro, int len);
+int printArrayElectro(Electrodomestico electro[], int len);
 
 
 /*

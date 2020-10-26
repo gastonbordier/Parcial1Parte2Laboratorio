@@ -37,6 +37,6 @@ int getReparacionArrayPositionById( Reparacion *reparacion, int len, int id);
 int addReparacion(Reparacion *reparacion, int arrayPosition, Fecha fecha,
 		Electrodomestico electro, Servicio servicio, Cliente cliente);
 
-int printArrayReparacion(Reparacion *reparacion, int len);
+int printArrayReparacion(Reparacion reparacion[], int len);
 
 #endif /* REPARACION_H_ */

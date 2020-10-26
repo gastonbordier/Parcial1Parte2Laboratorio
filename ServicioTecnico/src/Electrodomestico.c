@@ -77,7 +77,7 @@ int getElectroArrayPositionById(Electrodomestico *electro, int len, int id) {
 	return returnElectro;
 }
 
-int printArrayElectro(Electrodomestico *electro, int len) {
+int printArrayElectro(Electrodomestico electro[], int len) {
 
 	int arrayLength = 0;
 	printf("\n|%3s|%10s|%10s|%7s\n\n", "Id", "Serie", "Marca", "Modelo");
