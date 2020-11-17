@@ -14,11 +14,6 @@
 #define MAX 100
 #define MAX2 100
 
-void hardcodeo();
-void option1();
-void option2();
-void option3();
-void option7();
 
 int retorno;
 char flagExitM;
@@ -33,8 +28,8 @@ int flag1, flag2, flag7, flagClean;
 int marcaChoice, servicioChoice, clienteChoice;
 int firstArray;
 
-Electrodomestico tempElectro;
 
+Electrodomestico tempElectro;
 Reparacion tempR;
 
 Servicio servicio[] = { { 20001, "Garantia", 250 }, { 20002, "Mantenimiento",
@@ -58,6 +53,12 @@ Cliente cliente[] = { { 501, "Gaston", "Bordier" }, { 502, "Monica",
 };
 
 int menu();
+void hardcodeo();
+void option1();
+void option2();
+void option3();
+void option7();
+
 
 int main(void) {
 	setbuf(stdout, NULL);
@@ -129,11 +130,24 @@ int main(void) {
 			listElectroWithoutReparaciones(electro, reparacion, MAX);
 			break;
 		case 14:
-			showTotalAmountByElectrodomestico(electro, reparacion, MAX);
+			showTotalIncomeByElectrodomestico(electro, reparacion, MAX);
 			break;
 		case 15:
 			getMostRequiredServicio(reparacion, MAX, servicio);
 			break;
+		case 16:
+			getTotalIncomeByDate(reparacion, MAX);
+			break;
+		case 17:
+			getElectrosWithGarantia(electro, reparacion, MAX);
+			break;
+		case 18:
+			getReparacionesfrom2018Electros(electro, reparacion, MAX);
+					break;
+		case 19:
+			showMarcaRefaccion(reparacion, MAX);
+			break;
+
 		case 21:
 			response = -1;
 			break;
@@ -179,18 +193,23 @@ int menu() {
 			printf("8 - Lista reparaciones\n");
 		}
 		if (electrosAdded != 0) {
-			printf("9 - Mostrar electrodomesticos del anio 2020\n");
+			printf("9 - Mostrar electrodomesticos del anio 2020 (Informe 1)\n");
 			printf(
-					"10 - Mostrar electrodomesticos de una marca seleccionada\n");
+					"10 - Mostrar electrodomesticos de una marca seleccionada(Informe 2)\n");
 		}
 		if (reparacionesAdded != 0) {
 			printf(
-					"11 - Mostrar todas las reparaciones efectuadas al electrodomestico seleccionado\n");
-			printf("12 - Sumar lo recaudado por mantenimientos.\n");
+					"11 - Mostrar todas las reparaciones efectuadas al electrodomestico seleccionado(Informe 3)\n");
+			printf("12 - Sumar lo recaudado por mantenimientos.(Informe 10)\n");
 			printf(
-					"13 - Mostrar los electrodomesticos que no tuvieron reparaciones\n");
-			printf("14 - Mostrar la suma de los importes de las reparaciones de un electrodomestico\n");
-			printf("15 - Calcular el servicio mas pedido\n");
+					"13 - Mostrar los electrodomesticos que no tuvieron reparaciones(Informe 4)\n");
+			printf("14 - Mostrar la suma de los importes de las reparaciones de un electrodomestico(Informe 5)\n");
+			printf("15 - Calcular el servicio mas pedido(Informe 6)\n");
+			printf("16 - Sumar ingresos totales por fecha(Informe 7)\n");
+			printf("17 - Listar electrodomesticos con garantias hechas y la fecha(Informe 8)\n");
+			printf("18 - Trabajos realizados a electrodomesticos modelo 2018\n");
+			printf("19 - Informar marca con mas refacciones\n");
+
 
 		}
 		printf("21 - Salir \n");
@@ -242,15 +261,15 @@ void hardcodeo() {
 	firstArray = searchFirstEmptyReparacion(reparacion, MAX);
 	Fecha fechaHardCode[9];
 
-	strcpy(fechaHardCode[0].completeDate, "01/05/20");
-	strcpy(fechaHardCode[1].completeDate, "22/10/20");
-	strcpy(fechaHardCode[2].completeDate, "24/05/20");
-	strcpy(fechaHardCode[3].completeDate, "23/10/20");
-	strcpy(fechaHardCode[4].completeDate, "23/10/20");
-	strcpy(fechaHardCode[5].completeDate, "06/07/20");
-	strcpy(fechaHardCode[6].completeDate, "04/02/20");
-	strcpy(fechaHardCode[7].completeDate, "15/08/20");
-	strcpy(fechaHardCode[8].completeDate, "04/11/20");
+	strcpy(fechaHardCode[0].completeDate, "01/05/2019");
+	strcpy(fechaHardCode[1].completeDate, "22/10/2020");
+	strcpy(fechaHardCode[2].completeDate, "24/05/2020");
+	strcpy(fechaHardCode[3].completeDate, "23/10/2020");
+	strcpy(fechaHardCode[4].completeDate, "21/10/2019");
+	strcpy(fechaHardCode[5].completeDate, "06/07/2020");
+	strcpy(fechaHardCode[6].completeDate, "23/10/2020");
+	strcpy(fechaHardCode[7].completeDate, "15/08/2019");
+	strcpy(fechaHardCode[8].completeDate, "23/10/2020");
 
 	addReparacion(reparacion, firstArray, fechaHardCode[0], electro[0],
 			servicio[0], cliente[7]);
@@ -487,7 +506,7 @@ if (flag7 == 0) {
 
 if (flag7 == 0) {
 	tempR.ServicioR = servicio[arrayPosition];
-	flag7 += setStringFecha(&tempR.fecha, "Ingreso de fecha cancelado", 2020,
+	flag7 += setStringFecha(&tempR.fecha, "Ingreso de fecha cancelado", 2012,
 			2020, 3);
 }
 

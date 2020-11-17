@@ -22,9 +22,19 @@ int facturacionTotalPorMantenimientos(Reparacion reparacion[], int len);
 int listElectroWithoutReparaciones(Electrodomestico electroO[],
 		Reparacion reparacion[], int len);
 
-int showTotalAmountByElectrodomestico(Electrodomestico electro[],
+int showTotalIncomeByElectrodomestico(Electrodomestico electro[],
 		Reparacion reparacion[], int len);
 int getMostRequiredServicio(Reparacion reparacion[], int len, Servicio servicio[]);
+
+int getTotalIncomeByDate(Reparacion reparacionO[], int len);
+
+int getElectrosWithGarantia(Electrodomestico electro[],
+		Reparacion reparacion[], int len);
+
+int getReparacionesfrom2018Electros(Electrodomestico electroO[],
+		Reparacion reparacionO[], int len);
+
+int showMarcaRefaccion(Reparacion reparacionO[], int len);
 
 #ifndef INFORMES_H_
 #define INFORMES_H_

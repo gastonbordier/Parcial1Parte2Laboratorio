@@ -172,7 +172,7 @@ int listElectroWithoutReparaciones(Electrodomestico electroO[],
 	return retorno;
 }
 
-int showTotalAmountByElectrodomestico(Electrodomestico electroO[],
+int showTotalIncomeByElectrodomestico(Electrodomestico electroO[],
 		Reparacion reparacionO[], int len) {
 
 	Electrodomestico electro[len];
@@ -278,5 +278,210 @@ int getMostRequiredServicio(Reparacion reparacion[], int len,
 	} else {
 		printf("El servicio mas pedido fue %s\n", servicio[0].descripcion);
 	}
+	return retorno;
+}
+
+int getTotalIncomeByDate(Reparacion reparacionO[], int len) {
+	int retorno = 0;
+	int arrayLengthR = getReparacionesAdded(reparacionO, len);
+	Fecha datesWithReparaciones[arrayLengthR];
+	for (int i = 0; i < arrayLengthR; i++) {
+		strcpy(datesWithReparaciones[i].completeDate, "01/01/1900");
+	}
+
+	Reparacion reparacion[arrayLengthR];
+	for (int i = 0; i < arrayLengthR; i++) {
+		reparacion[i] = reparacionO[i];
+	}
+
+	int dateRepeated = 0;
+	int arrayPositionD = 0;
+
+	int compare = 0;
+
+	for (int i = 0; i < arrayLengthR; i++) {
+//	printf("%d\n", arrayLengthR);
+//
+//	printf(" i = %d. arraylengthR = %d. arrayPositionD = %d\n", i, arrayLengthR, arrayPositionD);
+
+		dateRepeated = 0;
+
+		for (int j = 0; j < arrayPositionD; j++) {
+			dateRepeated = 0;
+			compare = strcmp(reparacion[i].fecha.completeDate,
+					datesWithReparaciones[j].completeDate);
+//			printf(
+//					"reparacion[%d].fecha.completeDate, datesWithReparaciones[%d].completeDate\n",
+//					i, j);
+//			printf("strcmp( %s, %s) = %d\n", reparacion[i].fecha.completeDate,
+//					datesWithReparaciones[j].completeDate, compare);
+
+			if (compare == 0) {
+//				printf("La comparacion da igual\n");
+				dateRepeated = 1;
+				break;
+			}
+
+//			system("pause");
+		}
+
+		if (dateRepeated == 0) {
+//			printf("Se agrega al datesith\n");
+			datesWithReparaciones[arrayPositionD] = reparacion[i].fecha;
+//			printf("datesWithReparaciones[%d] = %s\n", arrayPositionD ,datesWithReparaciones[arrayPositionD].completeDate );
+			++arrayPositionD;
+
+		}
+//		system("pause");
+	}
+
+	printf("Fechas con reparaciones, elija una para ver el detalle:\n");
+	for (int i = 1; i <= arrayPositionD; i++) {
+		printf("Id %5d  | %10s\n", i,
+				datesWithReparaciones[i - 1].completeDate);
+	}
+	int chosenD;
+	int flagOk = setInt(&chosenD, "Elija una para ver el detalle:",
+			"Operacion cancelada", 1, arrayPositionD, 3);
+	int filtred = 0;
+	if (flagOk == 0) {
+		int totalByDate = 0;
+
+		for (int i = 0; i < arrayLengthR; i++) {
+			if (strcmp(reparacion[i].fecha.completeDate,
+					datesWithReparaciones[chosenD - 1].completeDate) == 0) {
+				if (i != filtred) {
+					reparacion[filtred] = reparacion[i];
+				}
+				totalByDate += reparacion[i].ServicioR.precio;
+
+				++filtred;
+			}
+		}
+		printArrayReparacion(reparacion, filtred);
+		printf("El total recaudado en el día es de $ %d.\n", totalByDate);
+	}
+
+	return retorno;
+}
+
+int getElectrosWithGarantia(Electrodomestico electroO[],
+		Reparacion reparacionO[], int len) {
+
+	Reparacion reparacion[len];
+	for (int i = 0; i < len; i++) {
+		reparacion[i] = reparacionO[i];
+	}
+	int arrayLengthE = getReparacionesAdded(reparacion, len);
+	Electrodomestico electroGarantia[100];
+	Fecha dateGarantia[100];
+	int arrayPosition = 0;
+
+	for (int i = 0; i < arrayLengthE; i++) {
+		if (reparacion[i].ServicioR.idServicio == 20001) {
+			electroGarantia[arrayPosition] = reparacion[i].ElectroR;
+			dateGarantia[arrayPosition] = reparacion[i].fecha;
+			++arrayPosition;
+		}
+
+	}
+
+	printf("\n|%3s|%10s|%10s|%7s|%15s|\n\n", "Id", "Serie", "Marca", "Modelo",
+			"Fecha Garantia");
+	for (int i = 0; i < arrayPosition; i++) {
+
+		if (electroGarantia[i].isEmpty == 0) {
+			printf("|%3d|%10s|%10s|%7d|%15s|\n", electroGarantia[i].id,
+					electroGarantia[i].serie,
+					electroGarantia[i].marcaElectro.descripcion,
+					electroGarantia[i].modelo, dateGarantia[i].completeDate);
+
+		} else {
+			break;
+		}
+
+	}
+	printf("\n");
+
+	return 0;
+}
+
+int getReparacionesfrom2018Electros(Electrodomestico electroO[],
+		Reparacion reparacionO[], int len) {
+
+	int retorno = 0;
+	int arrayLength2018 = 0;
+
+
+
+
+	int arrayLenghtR = getReparacionesAdded(reparacionO, len);
+	Reparacion reparacion[arrayLenghtR];
+	for (int i = 0; i < arrayLenghtR; i++) {
+		reparacion[i] = reparacionO[i];
+	}
+
+	for (int i = 0; i < arrayLenghtR; i++) {
+		if (reparacion[i].ElectroR.modelo == 2018) {
+
+			if (i != arrayLength2018) {
+				reparacion[arrayLength2018] = reparacion[i];
+			}
+
+			++arrayLength2018;
+		}
+
+	}
+	if( arrayLength2018 > 0)
+		printArrayReparacion(reparacion, arrayLength2018);
+	else{
+		printf("No hay ninguna reparacion efectuada a un Electrodomestico modelo 2018\n");
+	}
+
+	return retorno;
+
+}
+
+int showMarcaRefaccion(Reparacion reparacionO[], int len){
+	int retorno = 0;
+	Marca marca[] = { { 1001, "Whirpool" }, { 1002, "Sony" }, { 1003, "Liliana" }, {
+			1004, "Gafa" }, { 1005, "Phillips" }
+
+	};
+	int countRefacciones[5] = {0,0,0,0,0};
+
+	int arrayLenghtR = getReparacionesAdded(reparacionO, len);
+	Reparacion reparacion[arrayLenghtR];
+	for (int i = 0; i < arrayLenghtR; i++) {
+		reparacion[i] = reparacionO[i];
+	}
+
+	for( int i = 0 ; i < arrayLenghtR ; i++){
+		if( reparacion[i].ServicioR.idServicio == 20004){
+			switch( reparacion[i].ElectroR.marcaElectro.id){
+			case 1001:
+				++countRefacciones[0];
+							break;
+			case 1002:
+				++countRefacciones[1];
+							break;
+			case 1003:
+				++countRefacciones[2];
+							break;
+			case 1004:
+				++countRefacciones[3];
+							break;
+			case 1005:
+				++countRefacciones[4];
+							break;
+
+			}
+		}
+
+	}
+	for( int i = 0 ; i < 5 ; i++){
+		printf("%d\n", countRefacciones[i]);
+	}
+
 	return retorno;
 }
