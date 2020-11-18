@@ -66,7 +66,7 @@ int main(void) {
 
 	initArrayElectro(electro, MAX);
 	initArrayReparacion(reparacion, MAX);
-	hardcodeo();
+//	hardcodeo();
 
 	flagClean = 0;
 
@@ -145,7 +145,10 @@ int main(void) {
 			getReparacionesfrom2018Electros(electro, reparacion, MAX);
 					break;
 		case 19:
-			showMarcaRefaccion(reparacion, MAX);
+			showMarcaRefaccion(reparacion, MAX, marca);
+			break;
+		case 20:
+			getReparacionesByDate(reparacion, MAX);
 			break;
 
 		case 21:
@@ -209,6 +212,7 @@ int menu() {
 			printf("17 - Listar electrodomesticos con garantias hechas y la fecha(Informe 8)\n");
 			printf("18 - Trabajos realizados a electrodomesticos modelo 2018\n");
 			printf("19 - Informar marca con mas refacciones\n");
+			printf("20 - Listar reparaciones por fecha determinada\n");
 
 
 		}

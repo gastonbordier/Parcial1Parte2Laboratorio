@@ -284,72 +284,72 @@ int getMostRequiredServicio(Reparacion reparacion[], int len,
 int getTotalIncomeByDate(Reparacion reparacionO[], int len) {
 	int retorno = 0;
 	int arrayLengthR = getReparacionesAdded(reparacionO, len);
-	Fecha datesWithReparaciones[arrayLengthR];
-	for (int i = 0; i < arrayLengthR; i++) {
-		strcpy(datesWithReparaciones[i].completeDate, "01/01/1900");
-	}
-
+//	Fecha datesWithReparaciones[arrayLengthR];
+//	for (int i = 0; i < arrayLengthR; i++) {
+//		strcpy(datesWithReparaciones[i].completeDate, "01/01/1900");
+//	}
+//
 	Reparacion reparacion[arrayLengthR];
 	for (int i = 0; i < arrayLengthR; i++) {
 		reparacion[i] = reparacionO[i];
 	}
-
-	int dateRepeated = 0;
-	int arrayPositionD = 0;
-
-	int compare = 0;
-
-	for (int i = 0; i < arrayLengthR; i++) {
-//	printf("%d\n", arrayLengthR);
 //
-//	printf(" i = %d. arraylengthR = %d. arrayPositionD = %d\n", i, arrayLengthR, arrayPositionD);
+//	int dateRepeated = 0;
+//	int arrayPositionD = 0;
+//
+//	int compare = 0;
+//
+//	for (int i = 0; i < arrayLengthR; i++) {
+////	printf("%d\n", arrayLengthR);
+////
+////	printf(" i = %d. arraylengthR = %d. arrayPositionD = %d\n", i, arrayLengthR, arrayPositionD);
+//
+//		dateRepeated = 0;
+//
+//		for (int j = 0; j < arrayPositionD; j++) {
+//			dateRepeated = 0;
+//			compare = strcmp(reparacion[i].fecha.completeDate,
+//					datesWithReparaciones[j].completeDate);
+////			printf(
+////					"reparacion[%d].fecha.completeDate, datesWithReparaciones[%d].completeDate\n",
+////					i, j);
+////			printf("strcmp( %s, %s) = %d\n", reparacion[i].fecha.completeDate,
+////					datesWithReparaciones[j].completeDate, compare);
+//
+//			if (compare == 0) {
+////				printf("La comparacion da igual\n");
+//				dateRepeated = 1;
+//				break;
+//			}
+//
+////			system("pause");
+//		}
+//
+//		if (dateRepeated == 0) {
+////			printf("Se agrega al datesith\n");
+//			datesWithReparaciones[arrayPositionD] = reparacion[i].fecha;
+////			printf("datesWithReparaciones[%d] = %s\n", arrayPositionD ,datesWithReparaciones[arrayPositionD].completeDate );
+//			++arrayPositionD;
+//
+//		}
+////		system("pause");
+//	}
 
-		dateRepeated = 0;
-
-		for (int j = 0; j < arrayPositionD; j++) {
-			dateRepeated = 0;
-			compare = strcmp(reparacion[i].fecha.completeDate,
-					datesWithReparaciones[j].completeDate);
-//			printf(
-//					"reparacion[%d].fecha.completeDate, datesWithReparaciones[%d].completeDate\n",
-//					i, j);
-//			printf("strcmp( %s, %s) = %d\n", reparacion[i].fecha.completeDate,
-//					datesWithReparaciones[j].completeDate, compare);
-
-			if (compare == 0) {
-//				printf("La comparacion da igual\n");
-				dateRepeated = 1;
-				break;
-			}
-
-//			system("pause");
-		}
-
-		if (dateRepeated == 0) {
-//			printf("Se agrega al datesith\n");
-			datesWithReparaciones[arrayPositionD] = reparacion[i].fecha;
-//			printf("datesWithReparaciones[%d] = %s\n", arrayPositionD ,datesWithReparaciones[arrayPositionD].completeDate );
-			++arrayPositionD;
-
-		}
-//		system("pause");
-	}
-
-	printf("Fechas con reparaciones, elija una para ver el detalle:\n");
-	for (int i = 1; i <= arrayPositionD; i++) {
-		printf("Id %5d  | %10s\n", i,
-				datesWithReparaciones[i - 1].completeDate);
-	}
-	int chosenD;
-	int flagOk = setInt(&chosenD, "Elija una para ver el detalle:",
-			"Operacion cancelada", 1, arrayPositionD, 3);
+//	printf("Fechas con reparaciones, elija una para ver el detalle:\n");
+//	for (int i = 1; i <= arrayPositionD; i++) {
+//		printf("Id %5d  | %10s\n", i,
+//				datesWithReparaciones[i - 1].completeDate);
+//	}
+	Fecha chosenDate;
+	int flagOk = setStringFecha(&chosenDate,
+			"Ingrese la fecha con formato DD/MM/AAAA", 2000, 2020, 3);
 	int filtred = 0;
 	if (flagOk == 0) {
 		int totalByDate = 0;
 
 		for (int i = 0; i < arrayLengthR; i++) {
 			if (strcmp(reparacion[i].fecha.completeDate,
-					datesWithReparaciones[chosenD - 1].completeDate) == 0) {
+					chosenDate.completeDate) == 0) {
 				if (i != filtred) {
 					reparacion[filtred] = reparacion[i];
 				}
@@ -412,9 +412,6 @@ int getReparacionesfrom2018Electros(Electrodomestico electroO[],
 	int retorno = 0;
 	int arrayLength2018 = 0;
 
-
-
-
 	int arrayLenghtR = getReparacionesAdded(reparacionO, len);
 	Reparacion reparacion[arrayLenghtR];
 	for (int i = 0; i < arrayLenghtR; i++) {
@@ -432,56 +429,136 @@ int getReparacionesfrom2018Electros(Electrodomestico electroO[],
 		}
 
 	}
-	if( arrayLength2018 > 0)
+	if (arrayLength2018 > 0)
 		printArrayReparacion(reparacion, arrayLength2018);
-	else{
-		printf("No hay ninguna reparacion efectuada a un Electrodomestico modelo 2018\n");
+	else {
+		printf(
+				"No hay ninguna reparacion efectuada a un Electrodomestico modelo 2018\n");
 	}
 
 	return retorno;
 
 }
 
-int showMarcaRefaccion(Reparacion reparacionO[], int len){
+int showMarcaRefaccion(Reparacion reparacionO[], int len, Marca marcaO[]) {
 	int retorno = 0;
-	Marca marca[] = { { 1001, "Whirpool" }, { 1002, "Sony" }, { 1003, "Liliana" }, {
-			1004, "Gafa" }, { 1005, "Phillips" }
 
-	};
-	int countRefacciones[5] = {0,0,0,0,0};
+	typedef struct {
+		Marca marca;
+		int countRefacciones;
+
+	} MarcaCounting;
+
+	MarcaCounting marcaC[5];
+	MarcaCounting marcaTemp;
+
+	for (int i = 0; i < 5; i++) {
+		marcaC[i].marca = marcaO[i];
+		marcaC[i].countRefacciones = 0;
+	}
 
 	int arrayLenghtR = getReparacionesAdded(reparacionO, len);
+
 	Reparacion reparacion[arrayLenghtR];
 	for (int i = 0; i < arrayLenghtR; i++) {
 		reparacion[i] = reparacionO[i];
 	}
 
-	for( int i = 0 ; i < arrayLenghtR ; i++){
-		if( reparacion[i].ServicioR.idServicio == 20004){
-			switch( reparacion[i].ElectroR.marcaElectro.id){
+	for (int i = 0; i < arrayLenghtR; i++) {
+		if (reparacion[i].ServicioR.idServicio == 20004) {
+			switch (reparacion[i].ElectroR.marcaElectro.id) {
 			case 1001:
-				++countRefacciones[0];
-							break;
+				++marcaC[0].countRefacciones;
+				break;
 			case 1002:
-				++countRefacciones[1];
-							break;
+				++marcaC[1].countRefacciones;
+				break;
 			case 1003:
-				++countRefacciones[2];
-							break;
+				++marcaC[2].countRefacciones;
+				break;
 			case 1004:
-				++countRefacciones[3];
-							break;
+				++marcaC[3].countRefacciones;
+				break;
 			case 1005:
-				++countRefacciones[4];
-							break;
+				++marcaC[4].countRefacciones;
+				break;
 
 			}
 		}
 
 	}
-	for( int i = 0 ; i < 5 ; i++){
-		printf("%d\n", countRefacciones[i]);
+	int limit = 4;
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < limit; j++) {
+//			printf("%s %d \n", marcaC[j].marca.descripcion,
+//					marcaC[j].countRefacciones);
+//			printf("%s %d \n", marcaC[j+1].marca.descripcion,
+//					marcaC[j+1].countRefacciones);
+			if (marcaC[j + 1].countRefacciones > marcaC[j].countRefacciones) {
+
+				marcaTemp = marcaC[j + 1];
+				marcaC[j + 1] = marcaC[j];
+				marcaC[j] = marcaTemp;
+//				printf("cambiazo\n");
+			} else {
+//			printf("no pasa nada\n");
+			}
+//			system("pause");
+		}
+		--limit;
+	}
+
+	if (marcaC[4].countRefacciones == marcaC[0].countRefacciones) {
+		printf("Todas las marcas tienen %d refacciones\n",
+				marcaC[0].countRefacciones);
+	} else if (marcaC[3].countRefacciones == marcaC[0].countRefacciones) {
+		printf("%s, %s, %s y %s estan iguales con %d refacciones\n",
+				marcaC[3].marca.descripcion, marcaC[2].marca.descripcion,
+				marcaC[1].marca.descripcion, marcaC[0].marca.descripcion,
+				marcaC[0].countRefacciones);
+	} else if (marcaC[2].countRefacciones == marcaC[0].countRefacciones) {
+		printf("%s, %s y %s estan iguales con %d refacciones\n",
+				marcaC[2].marca.descripcion, marcaC[1].marca.descripcion,
+				marcaC[0].marca.descripcion, marcaC[0].countRefacciones);
+	} else if (marcaC[1].countRefacciones == marcaC[0].countRefacciones) {
+		printf("%s y %s estan iguales con %d refacciones\n",
+				marcaC[1].marca.descripcion, marcaC[0].marca.descripcion,
+				marcaC[0].countRefacciones);
+	} else {
+		printf("%s es la mayor marca con %d refacciones\n",
+				marcaC[0].marca.descripcion, marcaC[0].countRefacciones);
 	}
 
 	return retorno;
 }
+
+int getReparacionesByDate(Reparacion reparacionO[], int len) {
+	int retorno = 0;
+	int arrayLengthR = getReparacionesAdded(reparacionO, len);
+
+	Reparacion reparacion[arrayLengthR];
+	for (int i = 0; i < arrayLengthR; i++) {
+		reparacion[i] = reparacionO[i];
+	}
+
+		Fecha chosenDate;
+		int flagOk = setStringFecha(&chosenDate,
+				"Ingrese la fecha con formato DD/MM/AAAA", 2000, 2020, 3);
+		int filtred = 0;
+		if (flagOk == 0) {
+
+			for (int i = 0; i < arrayLengthR; i++) {
+				if (strcmp(reparacion[i].fecha.completeDate,
+						chosenDate.completeDate) == 0) {
+					if (i != filtred) {
+						reparacion[filtred] = reparacion[i];
+					}
+
+					++filtred;
+				}
+			}
+			printArrayReparacion(reparacion, filtred);
+		}
+
+		return retorno;
+	}

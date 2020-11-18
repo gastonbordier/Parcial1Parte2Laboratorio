@@ -34,7 +34,9 @@ int getElectrosWithGarantia(Electrodomestico electro[],
 int getReparacionesfrom2018Electros(Electrodomestico electroO[],
 		Reparacion reparacionO[], int len);
 
-int showMarcaRefaccion(Reparacion reparacionO[], int len);
+int showMarcaRefaccion(Reparacion reparacionO[], int len, Marca marcaO[]);
+
+int getReparacionesByDate(Reparacion reparacionO[], int len);
 
 #ifndef INFORMES_H_
 #define INFORMES_H_
